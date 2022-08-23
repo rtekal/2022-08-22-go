@@ -29,17 +29,22 @@ func (p *Player) CanWhistle() bool {
 
 func main() {
 
-  mario := Player{3, 1, make([]string, 3, 5)}
+    inventory := make([]string, 3, 5)
+    inventory[0] = "mushroom"
+
+    mario := Player{3, 1, inventory}
 
   mario.show()
 
-  pmario := &mario
-  pmario.Greenmushroom()
-  pmario.show()
+  mario.Greenmushroom()
+  mario.show()
 
-  pmario.Pickup("item")
-  pmario.show()
+  mario.Pickup("item")
+  mario.show()
 
-  pmario.CanWhistle()
+  fmt.Println(mario.CanWhistle())
 
+  mario.Stage = 7
+
+  fmt.Println(mario.CanWhistle())
 }
