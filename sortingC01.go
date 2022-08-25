@@ -12,6 +12,7 @@ import (
 type Person struct {
     Name   string
     Age    int
+    Height int
 }
 
 
@@ -20,7 +21,7 @@ type Person struct {
    we can control the "view" that is returned when someone tries
    to print our struct */
 func (p Person) String() string {
-    return fmt.Sprintf("%s: %d", p.Name, p.Age)
+    return fmt.Sprintf("%s: %d %d", p.Name, p.Age, p.Height)
 }
 
 // ByAge implements sort.Interface for []Person based on
@@ -37,14 +38,26 @@ func (a ByAge) Less(i, j int) bool {
     return a[i].Age < a[j].Age
 }
 
+type ByHeight []Person
+
+func (a ByHeight) Len() int {
+    return len(a)
+}
+func (a ByHeight) Swap(i, j int) {
+    a[i], a[j] = a[j], a[i]
+}
+func (a ByHeight) Less(i, j int) bool {
+    return a[i].Height < a[j].Height
+}
+
 func main() {
 
     // Name, Age
     people := []Person{
-        {"Bob", 31},
-        {"John", 42},
-        {"Michael", 17},
-        {"Jenny", 26},
+        {"Bob", 31, 75},
+        {"John", 42, 80},
+        {"Michael", 17, 137},
+        {"Jenny", 26, 148},
     }
 
     /* If you commented out the "String()" function,
@@ -57,6 +70,10 @@ func main() {
     // a set of methods for the slice type, as with ByAge, and
     // call sort.Sort.
     sort.Sort(ByAge(people))
-    fmt.Println(people)
+    fmt.Println("By Age: ", people)
+
+    
+    sort.Sort(ByHeight(people))
+    fmt.Println("By Height: ", people)
 
 }
