@@ -1,0 +1,20 @@
+url = https://github.com/rzfeeser/dockerGo.git
+976  git clone https://github.com/rzfeeser/dockerGo.git `pwd`/dockergo/
+  977  cd dockergo
+  978  cat main.go
+  979  go run main.go
+  980  sudo docker build --tag dockergo .
+  981  sudo docker images
+  982  cat Dockerfile.multistage 
+  983  sudo docker build -t dockergo:multistage -f Dockerfile.multistage .
+  984  sudo docker images
+  985  cat /etc/os-release 
+  986  sudo docker run -d  -p 9876:9876 dockergo:multistage
+  987  sudo docker ps
+  988  curl http://localhost:9876/
+  989  curl http://localhost:9876/spock
+  990  curl http://localhost:9876/ping
+  991  sudo docker stop
+  992  sudo docker stop $(sudo docker ps -aq)
+  993  sudo docker container prune
+  994  cat .git/config 
