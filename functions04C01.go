@@ -8,20 +8,17 @@ import (
     "sort"
 )
 
+
+
+
+func main() {
+
 typedef People struct {
     Host string
     Mac  string
     Ram  int
     Cpu  int
   }
-
-
-func algo(i int, j int, people []People) bool { 
-    return people[i].Mac > people[j].Mac 
-}
-
-func main() {
-
         // people is a slice of structures
     // we are defining this "anonymously", which means to
     // instantiate the instance immediately after declaring the type
@@ -30,7 +27,7 @@ func main() {
     {"prospero", "3c539188c9e3", 2048, 2},
     {"nestor", "1b166127a9e3", 2048, 1},
     {"odin", "4d545b88c9e3", 4096, 2},
-}
+    }
 // this technique makes sense if you're going to use a struct once and be done
 
     // marshaling or unmarshalling json, or prepping HTTP responses
@@ -48,6 +45,10 @@ func main() {
 
     sort.Slice(people, func(i, j int) bool { return people[i].Ram < people[j].Ram })
     fmt.Println("By RAM:", people)
+    
+func algo(i int, j int) bool { 
+    return people[i].Mac > people[j].Mac 
+}
 
     // assigning a nameless function to a variable is also possible
     sort.Slice(people, algo)
